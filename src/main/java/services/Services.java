@@ -1,4 +1,4 @@
-package org.Aluve.Pages.Services;
+package services;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.Cookie;

@@ -69,7 +69,7 @@ public class BookCartSteps {
         for (Book book : searchResults) {
             if (book.getName().equals(expectedBookName)) {
                 bookFound = true;
-                // Now you can perform further assertions to check book details
+               
                 assertEquals(expectedBookDetails.get(0).getPrice(), book.getPrice());
                 assertEquals(expectedBookDetails.get(0).getAuthor(), book.getAuthor());
                 assertEquals(expectedBookDetails.get(0).getCategory(), book.getCategory());

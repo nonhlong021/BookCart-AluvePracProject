@@ -31,45 +31,44 @@ public class BookCartSteps {
     public void theUserSearchesForTheBook() {
         services.build();
         response = services.send();
-
     }
 
     @When("the user searches for the book with the name {string}")
     public void theUserSearchesForTheBookWithTheName(String bookName) {
-        String targetBookName = bookName;
+        List<String> bookNames = response.getBody().jsonPath().getList();
         boolean found = false;
 
-        for (String bookName : bookNames) {
-            if (bookName.equals(targetBookName)) {
+        for (String book : bookNames) {
+            if (book.equals(bookName)) {
                 found = true;
                 break;
             }
         }
 
         if (found) {
-            System.out.println("Found the book: " + targetBookName);
+            System.out.println("Found the book: " + bookName);
         } else {
             System.out.println("Book not found in the list.");
         }
     }
     @Then("I should find the book id")
     public void iShouldFindTheBookId() {
-        id = String.valueOf(books.get().body().
-                jsonPath().getInt("bookId[0]"));
+        id = response.getBody().jsonPath().get("bookId[0]");
     }
 
     @When("the user searches for the book similar to Soul of the Sword by {string}")
     public void theUserSearchesForTheBookSimilarToSoulOfTheSwordBy(String arg0) {
+        services.setEndpoint("/api/Book/GetSimilarBooks/"+id);
         
     }
 
     @Then("the list of similar books include {string} with the price {string} and author as {string} and category as {string}")
-    public void theListOfSimilarBooksIncludeWithThePriceAndAuthorAsAndCategoryAs(String arg0, String arg1, String arg2, String arg3) {
+    public void theListOfSimilarBooksIncludeWithThePriceAndAuthorAsAndCategoryAs(String , String arg1, String arg2, String arg3) {
         boolean bookFound = false;
         for (Book book : searchResults) {
             if (book.getName().equals(expectedBookName)) {
                 bookFound = true;
-               
+
                 assertEquals(expectedBookDetails.get(0).getPrice(), book.getPrice());
                 assertEquals(expectedBookDetails.get(0).getAuthor(), book.getAuthor());
                 assertEquals(expectedBookDetails.get(0).getCategory(), book.getCategory());

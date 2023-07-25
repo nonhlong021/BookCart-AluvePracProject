@@ -76,21 +76,6 @@ public class Services {
         this.requestParam = requestParam;
     }
 
-    /**
-     * The function adds a key and a file location to an ArrayList.
-     *
-     * @param key The key is a unique identifier for the file being added. It is used to retrieve the
-     * file later on when needed.
-     * @param absoluteFileLocation The absolute file location is the complete path of a file on a
-     * computer's file system, including the drive letter (if applicable), all directories, and the file
-     * name with its extension. For example, "C:\Users\JohnDoe\Documents\example.txt" is an absolute file
-     * location on
-     */
-    public void addFile(String key, String absoluteFileLocation){
-        this.media = new ArrayList<>();
-        this.media.add(key);
-        this.media.add(new File(absoluteFileLocation));
-    }
 
     /**
      * The function builds a request specification with the given base URL.
